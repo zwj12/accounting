@@ -1,5 +1,5 @@
-<form action="cash/accountingsubject/1/edit" method="post">
+<form action="/cash/accountingsubject/{{ accounting_subject.id }}/edit" method="post">
     {% csrf_token %}
-    {{ form }}
+    {{ form.as_p }}
     <input type="submit" value="Submit">
 </form>
