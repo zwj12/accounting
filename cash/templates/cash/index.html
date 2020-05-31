@@ -1,3 +1,7 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'cash/style.css' %}">
+
 {% if accounting_subject_list %}
     <ul>
     {% for accounting_subject in accounting_subject_list %}
