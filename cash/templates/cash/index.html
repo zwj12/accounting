@@ -1,0 +1,9 @@
+{% if accounting_subject_list %}
+    <ul>
+    {% for accounting_subject in accounting_subject_list %}
+        <li><a href="{% url 'cash:detail' accounting_subject.id %}">{{ accounting_subject.accounting_subject }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No accounting_subject are available.</p>
+{% endif %}

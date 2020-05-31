@@ -1,0 +1,6 @@
+<h1>{{ accounting_subject.accounting_subject }}</h1>
+<ul>
+{% for cashonhand in accounting_subject.cashonhand_set.all %}
+    <li>{{ cashonhand.summary }}</li>
+{% endfor %}
+</ul>
