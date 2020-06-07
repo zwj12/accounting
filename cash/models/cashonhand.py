@@ -8,12 +8,12 @@ from cash.models import AccountingSubject
 
 class CashOnHand(CommonInfo):
     operation_date = models.DateField(default=date.today)
-    serial_number = models.IntegerField(default=1)
+    serial_number = models.IntegerField("sequence", default=1)
     lucre = models.FloatField()
     # balance = models.FloatField(editable=False)
     balance = models.FloatField()
     summary = models.CharField(max_length=255)
-    opposite_account = models.ForeignKey(AccountingSubject, on_delete=models.CASCADE)
+    opposite_account = models.ForeignKey(AccountingSubject, on_delete=models.CASCADE, verbose_name="subject")
 
     class Meta:
         db_table = 'cash_cash_on_hand'
