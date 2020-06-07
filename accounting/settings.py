@@ -25,7 +25,7 @@ SECRET_KEY = '2*8fk&*5&tt6+5lop)gqt-^n!*te$$0y1^zg9j^hjgj=@uhhbw'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -119,3 +119,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = 'C:/Users/CNMIZHU7/source/repos/Django/accounting/cash/static'
+#STATIC_ROOT = 'C:/Users/CNMIZHU7/source/repos/Django/accounting/temp'
