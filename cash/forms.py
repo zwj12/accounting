@@ -19,4 +19,5 @@ class AccountingSubjectForm(ModelForm):
 class CashOnHandForm(ModelForm):
     class Meta:
         model = CashOnHand
-        fields = ['operation_date', 'serial_number', 'opposite_account', 'summary', 'lucre', 'balance', 'remark']
+        # fields = ['operation_date', 'serial_number', 'opposite_account', 'summary', 'lucre', 'balance', 'remark']
+        fields = ['operation_date', 'serial_number', 'opposite_account', 'summary', 'lucre', 'remark']
