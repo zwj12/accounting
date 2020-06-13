@@ -3,7 +3,7 @@ from django.contrib import admin
 # Register your models here.
 
 from django.contrib import admin
-from .models import AccountingSubject, CashOnHand, Choice
+from .models import AccountingSubject, CashOnHand
 
 
 class AccountingSubjectAdmin(admin.ModelAdmin):
@@ -19,10 +19,5 @@ class CashOnHandAdmin(admin.ModelAdmin):
     search_fields = ['summary']
 
 
-class ChoiceAdmin(admin.ModelAdmin):
-    fields = ['choice_text', 'votes', 'serial_number', 'lucre']
-
-
 admin.site.register(AccountingSubject, AccountingSubjectAdmin)
 admin.site.register(CashOnHand, CashOnHandAdmin)
-admin.site.register(Choice, ChoiceAdmin)
