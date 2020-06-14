@@ -1,3 +1,7 @@
+import logging
+
+from django.contrib.auth import authenticate
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 
@@ -6,6 +10,8 @@ from django.views import generic
 
 from cash.forms import AccountingSubjectForm
 from cash.models import AccountingSubject
+
+logger = logging.getLogger(__name__)
 
 
 class IndexView(generic.ListView):
@@ -33,7 +39,21 @@ def detail(request, accounting_subject_id):
     return render(request, 'cash/detail.html', {'accounting_subject': accounting_subject})
 
 
+# @login_required()
 def accounting_subject_edit(request, accounting_subject_id):
+    # logger.error(request)
+    # if request.user.is_authenticated:
+    #     # A backend authenticated the credentials
+    #     logger.debug(request.user.username + " is logged")
+    #     if request.user.has_perm('cash.add_cashonhand'):
+    #         logger.debug(request.user.username + " has permission: cash.add_cashonhand")
+    #     if request.user.has_perm('cash.add_accountingsubject'):
+    #         logger.debug(request.user.username + " has permission: cash.add_accountingsubject")
+    #     return HttpResponseRedirect('/admin')
+    # else:
+    #     # No backend authenticated the credentials
+    #     return HttpResponseRedirect('/cash')
+
     accounting_subject = get_object_or_404(AccountingSubject, pk=accounting_subject_id)
     if request.method == 'POST':
         form = AccountingSubjectForm(request.POST)
