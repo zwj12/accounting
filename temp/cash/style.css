@@ -1,3 +1,61 @@
-li a {
-    color: green;
+@CHARSET "UTF-8";
+
+/* 导航框 */
+#header .zwj_menu{
+	float:right;
+	margin:0px;
+}
+
+#header .zwj_menu  a{
+	text-decoration:none;
+	color: #fff;
+	background: #003d4c;
+	margin:-10px 0px 0px;
+	padding:10px 20px 18px;
+}
+
+#header .zwj_menu  a:focus,
+#header .zwj_menu  a:hover{
+	text-decoration:none;
+	background:#996633;
+	color:#FFF;
+}
+
+/* 内容框头标题 */
+#zwj_mainContentHead {
+	height:30px;
+	line-height:30px;
+	font-size:large;
+	color:green;
+}
+
+/* 表格 */
+.zwj_tdhead{
+	color:purple;
+}
+
+.zwj_tdcontent{
+	color:blue;
+}
+
+/*参数标题*/
+.zwj_parameter_title{
+	color:blue;
+	font-weight:bold;
+	font-size:large;
+	line-height:300%;
+}
+
+/*按钮*/
+.zwj_btn{
+	padding:5px 14px;
+	color:#fff;
+	border:1px solid #3792b3;
+	background:#3792b3;
+	border-radius:14px;
+	text-decoration:none;
+}
+
+.zwj_btn:hover{
+	background:#a14141;
 }

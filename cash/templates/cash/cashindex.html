@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Cash On Hand{% endblock %}
+
+{% block content %}
+{% if cash_list %}
+<ul>
+    {% for cash in cash_list %}
+    <li>{{ cash.summary }}</li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No cash are available.</p>
+{% endif %}
+{% endblock %}
+
+

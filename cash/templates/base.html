@@ -1,22 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <link rel="stylesheet" href="style.css">
-    <title>{% block title %}My amazing site{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'cash/style.css' %}">
+    <title>{% block title %}ERP{% endblock %}</title>
 </head>
-
 <body>
-    <div id="sidebar">
-        {% block sidebar %}
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/blog/">Blog</a></li>
-        </ul>
-        {% endblock %}
-    </div>
 
-    <div id="content">
-        {% block content %}{% endblock %}
+<div id="header">
+    <h1>EPR</h1>
+    <div class="topnav">
+        <a href="{% url 'cash:index'%}">cash</a>
+        <a href="{% url 'cash:detail' 1 %}">detail</a>
     </div>
+</div>
+
+<div id="content">
+    {% block content %}{% endblock %}
+</div>
+
+<div id="footer">
+    <h2>Django</h2>
+</div>
+
 </body>
 </html>

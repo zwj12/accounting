@@ -9,7 +9,7 @@ from django.shortcuts import render, get_object_or_404
 from django.views import generic
 
 from cash.forms import AccountingSubjectForm
-from cash.models import AccountingSubject
+from cash.models import AccountingSubject, CashOnHand
 
 logger = logging.getLogger(__name__)
 
@@ -20,6 +20,14 @@ class IndexView(generic.ListView):
 
     def get_queryset(self):
         return AccountingSubject.objects.all()
+
+
+class CashIndexView(generic.ListView):
+    template_name = 'cash/cashindex.html'
+    context_object_name = 'cash_list'
+
+    def get_queryset(self):
+        return CashOnHand.objects.all()
 
 
 class DetailView(generic.DetailView):
@@ -37,6 +45,10 @@ def index(request):
 def detail(request, accounting_subject_id):
     accounting_subject = get_object_or_404(AccountingSubject, pk=accounting_subject_id)
     return render(request, 'cash/detail.html', {'accounting_subject': accounting_subject})
+
+
+def child(request):
+    return render(request, 'cash/child.html')
 
 
 # @login_required()
