@@ -2,8 +2,9 @@ import datetime
 from datetime import date
 from django.utils import timezone
 from django.db import models
+
+from accountingsubject.models import AccountingSubject
 from cash.models import CommonInfo
-from cash.models import AccountingSubject
 
 
 class CashOnHand(CommonInfo):

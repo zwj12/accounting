@@ -3,12 +3,7 @@ from django.contrib import admin
 # Register your models here.
 
 from django.contrib import admin
-from .models import AccountingSubject, CashOnHand
-
-
-class AccountingSubjectAdmin(admin.ModelAdmin):
-    fields = ['accounting_subject', 'debit_balance', 'remark']
-    list_display = ('accounting_subject', 'debit_balance', 'remark')
+from .models import CashOnHand
 
 
 class CashOnHandAdmin(admin.ModelAdmin):
@@ -19,5 +14,4 @@ class CashOnHandAdmin(admin.ModelAdmin):
     search_fields = ['summary']
 
 
-admin.site.register(AccountingSubject, AccountingSubjectAdmin)
 admin.site.register(CashOnHand, CashOnHandAdmin)

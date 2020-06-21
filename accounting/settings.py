@@ -46,6 +46,7 @@ ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'cash.apps.CashConfig',
+    'accountingsubject.apps.AccountingsubjectConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

@@ -3,18 +3,18 @@
 {% block title %}Cash On Hand{% endblock %}
 
 {% block content %}
+您的位置：库存现金收支明细表 <a href="{% url 'cash:index'%}">添加</a>
 {% if cash_list %}
-
 <table class="table table-striped">
     <thead>
     <tr>
         <th width="100px">业务日期</th>
-        <th width="40px">序号</th>
+        <th width="60px">序号</th>
         <th>摘要</th>
         <th width="80px">收入</th>
         <th width="80px">支出</th>
         <th width="80px">余额</th>
-        <th width="100px">对方科目</th>
+        <th width="160px">对方科目</th>
         <th width="80px">业务员</th>
         <th width="100px">操作</th>
     </tr>
@@ -35,7 +35,6 @@
     {% endfor %}
     </tbody>
 </table>
-
 {% else %}
 <p>No cash are available.</p>
 {% endif %}

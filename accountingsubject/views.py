@@ -1,17 +1,11 @@
-import logging
-
-from django.contrib.auth import authenticate
-from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse, Http404, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
 from django.views import generic
 
-from cash.forms import AccountingSubjectForm
-from cash.models import AccountingSubject, CashOnHand
-
-logger = logging.getLogger(__name__)
+from accountingsubject.forms import AccountingSubjectForm
+from accountingsubject.models import AccountingSubject
 
 
 class IndexView(generic.ListView):
@@ -20,14 +14,6 @@ class IndexView(generic.ListView):
 
     def get_queryset(self):
         return AccountingSubject.objects.all()
-
-
-class CashIndexView(generic.ListView):
-    template_name = 'cash/cashindex.html'
-    context_object_name = 'cash_list'
-
-    def get_queryset(self):
-        return CashOnHand.objects.all()
 
 
 class DetailView(generic.DetailView):
@@ -85,8 +71,3 @@ def accounting_subject_edit(request, accounting_subject_id):
         form = AccountingSubjectForm(obj)
 
     return render(request, 'cash/accountingsubjectedit.html', {'form': form, 'accounting_subject': accounting_subject})
-
-
-def results(request, accounting_subject_id):
-    return HttpResponse("You're looking at the results of accounting subject %s." % accounting_subject_id)
-
