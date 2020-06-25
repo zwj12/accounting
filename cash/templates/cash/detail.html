@@ -1,6 +1,7 @@
-<h1>{{ accounting_subject.accounting_subject }}</h1>
-<ul>
-{% for cashonhand in accounting_subject.cashonhand_set.all %}
-    <li>{{ cashonhand.summary }}</li>
-{% endfor %}
-</ul>
+{% extends "base.html" %}
+
+{% block title %}Cash On Hand{% endblock %}
+
+{% block content %}
+<h1>{{ cash_on_hand.summary }}</h1>
+{% endblock %}

@@ -1,5 +1,7 @@
 import datetime
 from datetime import date
+
+from django.urls import reverse
 from django.utils import timezone
 from django.db import models
 
@@ -25,6 +27,9 @@ class CashOnHand(CommonInfo):
 
     def was_created_recently(self):
         return self.created >= timezone.now() - datetime.timedelta(days=1)
+
+    def get_absolute_url(self):
+        return reverse('cash:detail', kwargs={'pk': self.pk})
 
     def save(self, *args, **kwargs):
         # do_something()
