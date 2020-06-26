@@ -10,13 +10,14 @@ from cash.models import CommonInfo
 
 
 class CashOnHand(CommonInfo):
-    operation_date = models.DateField(default=date.today)
-    serial_number = models.IntegerField("sequence", default=1)
-    lucre = models.FloatField()
+    operation_date = models.DateField("日期", default=date.today)
+    serial_number = models.IntegerField("序号", default=65535, help_text="( >=1 )")
+    lucre = models.FloatField(verbose_name="金额", help_text="( >0 )")
     balance = models.FloatField(editable=False)
     # balance = models.FloatField()
     summary = models.CharField(max_length=255)
-    opposite_account = models.ForeignKey(AccountingSubject, on_delete=models.CASCADE, verbose_name="subject")
+    opposite_account = models.ForeignKey(AccountingSubject, on_delete=models.PROTECT,
+                                         verbose_name="会计科目")
 
     class Meta:
         db_table = 'cash_cash_on_hand'

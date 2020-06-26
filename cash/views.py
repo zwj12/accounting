@@ -1,6 +1,6 @@
 import logging
 
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
@@ -9,7 +9,7 @@ from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
 from django.views import generic
 
-from cash.forms import CashOnHandForm
+from cash.forms import CashOnHandForm, CashOnHandModelForm
 from cash.models import CashOnHand
 
 logger = logging.getLogger(__name__)
@@ -29,22 +29,13 @@ class DetailView(generic.DetailView):
     template_name = 'cash/detail.html'
 
 
-class AddView(generic.edit.FormView):
-    template_name = 'cash/cashindex.html'
-    form_class = CashOnHandForm
-    success_url = ''
-    context_object_name = 'cash_list'
-
-    def form_valid(self, form):
-        # This method is called when valid form data has been POSTed.
-        # It should return an HttpResponse.
-        return super().form_valid(form)
-
-
 class CreateView(generic.edit.CreateView):
-    model = CashOnHand
-    fields = ['operation_date', 'serial_number', 'opposite_account', 'summary', 'lucre', 'remark']
+    # model = CashOnHand
+    # fields = ['operation_date', 'serial_number', 'opposite_account', 'summary', 'lucre', 'remark']
     template_name = 'cash/add.html'
+    form_class = CashOnHandModelForm
+    model = CashOnHand
+    success_url = reverse_lazy('cash:index')
 
 
 class UpdateView(generic.edit.UpdateView):
@@ -52,8 +43,19 @@ class UpdateView(generic.edit.UpdateView):
     fields = ['operation_date', 'serial_number', 'opposite_account', 'summary', 'lucre', 'remark']
     template_name_suffix = '_update_form'
     # template_name = 'cash/edit.html'
+    success_url = reverse_lazy('cash:index')
 
 
 class DeleteView(generic.edit.DeleteView):
     model = CashOnHand
     success_url = reverse_lazy('cash:index')
+
+
+@login_required
+def login_view(request):
+    return render(request, 'cash/child1.html')
+
+
+def logout_view(request):
+    logout(request)
+    # Redirect to a success page.
