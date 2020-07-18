@@ -6,10 +6,11 @@ from django.views import generic
 
 from accountingsubject.forms import AccountingSubjectForm
 from accountingsubject.models import AccountingSubject
+from cash.models import CashOnHand
 
 
 class IndexView(generic.ListView):
-    template_name = 'cash/index.html'
+    template_name = 'accountingsubject/index.html'
     context_object_name = 'accounting_subject_list'
 
     def get_queryset(self):
@@ -19,7 +20,13 @@ class IndexView(generic.ListView):
 class DetailView(generic.DetailView):
     model = AccountingSubject
     context_object_name = 'accounting_subject'
-    template_name = 'cash/detail.html'
+    template_name = 'accountingsubject/detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['list_count'] = CashOnHand.objects.filter(opposite_account_id=self.object.id).count()
+        context['list_sum'] = CashOnHand.objects.filter(opposite_account_id=self.object.id).count()
+        return context
 
 
 def index(request):

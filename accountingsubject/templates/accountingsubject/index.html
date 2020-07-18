@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}会计科目{% endblock %}
+
+{% block content %}
+
+您的位置：会计科目
+{% if accounting_subject_list %}
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th width="200px">会计科目</th>
+        <th width="200px">业务数量</th>
+        <th width="200px">总额</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for accounting_subject in accounting_subject_list %}
+    <tr>
+        <td><a href="{% url 'subject:detail' accounting_subject.id %}">{{ accounting_subject.accounting_subject }}</a></td>
+        <td>{{ accounting_subject.accounting_subject }}</td>
+        <td>{{ accounting_subject.accounting_subject }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% else %}
+<p>没有会计科目</p>
+{% endif %}
+{% endblock %}
+
+

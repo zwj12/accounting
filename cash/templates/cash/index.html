@@ -1,13 +1,70 @@
-{% load static %}
+{% extends "base.html" %}
 
-<link rel="stylesheet" type="text/css" href="{% static 'cash/style.css' %}">
+{% block title %}Cash On Hand{% endblock %}
 
-{% if accounting_subject_list %}
-    <ul>
-    {% for accounting_subject in accounting_subject_list %}
-        <li><a href="{% url 'cash:detail' accounting_subject.id %}">{{ accounting_subject.accounting_subject }}</a></li>
+{% block content %}
+
+您的位置：库存现金收支明细表 <a href="{% url 'cash:add'%}">添加</a>
+{% if cash_list %}
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th width="100px">业务日期</th>
+        <th width="60px">序号</th>
+        <th>摘要</th>
+        <th width="80px">金额</th>
+        <th width="160px">对方科目</th>
+        <th width="80px">业务员</th>
+        <th width="150px">操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for cash in cash_list %}
+    <tr>
+        <td>{{ cash.operation_date|date:"Y-n-j" }}</td>
+        <td><a href="{% url 'cash:detail' cash.id %}">{{ cash.serial_number }}</a></td>
+        <td><a href="{{ cash.get_absolute_url }}">{{ cash.summary }}</a></td>
+        {% if cash.opposite_account.debit_balance == False %}
+        <td style="color:red;">
+            {{ cash.lucre }}
+        </td>
+        {% else %}
+        <td style="color:black;">
+            {{ cash.lucre }}
+        </td>
+        {% endif %}
+        <td>{{ cash.opposite_account.accounting_subject }}</td>
+        <td>{{ cash.user.username }}</td>
+        <td>
+            <a class="btn btn-primary" href="{% url 'cash:edit' cash.id %}">修改</a>
+            <a class="btn btn-primary" href="{% url 'cash:delete' cash.id %}">删除</a>
+        </td>
+    </tr>
     {% endfor %}
-    </ul>
+    </tbody>
+</table>
+
+<div>
+    <span class="pagination justify-content-center">
+        {% if page_obj.has_previous %}
+            <a class="page-link" href="?page=1">&laquo; first</a>
+            <a class="page-link" href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a class="page-link" href="?page={{ page_obj.next_page_number }}">next</a>
+            <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+
 {% else %}
-    <p>No accounting_subject are available.</p>
+<p>No cash are available.</p>
 {% endif %}
+{% endblock %}
+
+

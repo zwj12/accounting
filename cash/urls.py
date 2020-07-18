@@ -9,7 +9,7 @@ urlpatterns = [
     # path('accountingsubject/<int:pk>/', views.DetailView.as_view(), name='detail'),
     # path('accountingsubject/<int:accounting_subject_id>/edit/', views.accounting_subject_edit, name='accountingsubjectedit'),
     path('login/', views.login_view, name='login1'),
-    # path('accounts/login/', auth_views.LoginView.as_view(template_name='registration/login.html')),
+    path('accounts/login/', auth_views.LoginView.as_view(template_name='registration/login.html')),
     path('accounts/', include('django.contrib.auth.urls')),
     # path('accounts/login/', auth_views.LoginView.as_view()),
     # path('accounts/login/', views.IndexView.as_view(), name='login2'),

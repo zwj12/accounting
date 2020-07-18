@@ -1,6 +1,7 @@
 import datetime
 from datetime import date
 
+from django.contrib.auth.models import User
 from django.urls import reverse
 from django.utils import timezone
 from django.db import models
@@ -15,9 +16,10 @@ class CashOnHand(CommonInfo):
     lucre = models.FloatField(verbose_name="金额", help_text="( >0 )")
     balance = models.FloatField(editable=False)
     # balance = models.FloatField()
-    summary = models.CharField(max_length=255)
+    summary = models.CharField(verbose_name="摘要", max_length=255)
     opposite_account = models.ForeignKey(AccountingSubject, on_delete=models.PROTECT,
                                          verbose_name="会计科目")
+    user = models.ForeignKey(User, on_delete=models.PROTECT)
 
     class Meta:
         db_table = 'cash_cash_on_hand'
