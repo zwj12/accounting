@@ -1,3 +1,4 @@
+from django.db.models import Count, Sum
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 
@@ -14,7 +15,7 @@ class IndexView(generic.ListView):
     context_object_name = 'accounting_subject_list'
 
     def get_queryset(self):
-        return AccountingSubject.objects.all()
+        return AccountingSubject.objects.annotate(Count('cashonhand'), Sum('cashonhand__lucre'))
 
 
 class DetailView(generic.DetailView):
@@ -27,21 +28,6 @@ class DetailView(generic.DetailView):
         context['list_count'] = CashOnHand.objects.filter(opposite_account_id=self.object.id).count()
         context['list_sum'] = CashOnHand.objects.filter(opposite_account_id=self.object.id).count()
         return context
-
-
-def index(request):
-    accounting_subject_list = AccountingSubject.objects.all()
-    context = {'accounting_subject_list': accounting_subject_list}
-    return render(request, 'cash/index.html', context)
-
-
-def detail(request, accounting_subject_id):
-    accounting_subject = get_object_or_404(AccountingSubject, pk=accounting_subject_id)
-    return render(request, 'cash/detail.html', {'accounting_subject': accounting_subject})
-
-
-def child(request):
-    return render(request, 'cash/child.html')
 
 
 # @login_required()

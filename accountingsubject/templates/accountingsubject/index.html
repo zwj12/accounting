@@ -18,8 +18,8 @@
     {% for accounting_subject in accounting_subject_list %}
     <tr>
         <td><a href="{% url 'subject:detail' accounting_subject.id %}">{{ accounting_subject.accounting_subject }}</a></td>
-        <td>{{ accounting_subject.accounting_subject }}</td>
-        <td>{{ accounting_subject.accounting_subject }}</td>
+        <td>{{ accounting_subject.cashonhand__count }}</td>
+        <td>{{ accounting_subject.cashonhand__lucre__sum|floatformat }}</td>
     </tr>
     {% endfor %}
     </tbody>
